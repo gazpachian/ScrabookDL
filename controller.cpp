@@ -16,6 +16,7 @@ Controller::Controller(int x, int y) {
     velocity = vel;
 }
 
+/* This method UGLY tho.*/
 bool Controller::getKeys(SDL_Event e) {
     bool ret = true;
     while(SDL_PollEvent(&e) != 0) {
@@ -24,10 +25,30 @@ bool Controller::getKeys(SDL_Event e) {
         }
         else if(e.type == SDL_KEYDOWN) {
             if(e.key.keysym.sym == SDLK_UP){
-                applyAcceleration(Vector2(0, -45));
+                is_key_up = true;
             }
             else if(e.key.keysym.sym == SDLK_DOWN){
-                applyAcceleration(Vector2(0, 45));
+                is_key_down = true;
+            }
+            else if(e.key.keysym.sym == SDLK_LEFT){
+                is_key_left = true;
+            }
+            else if(e.key.keysym.sym == SDLK_RIGHT){
+                is_key_right = true;
+            }
+        }
+        else if(e.type == SDL_KEYUP) {
+            if(e.key.keysym.sym == SDLK_UP){
+                is_key_up = false;
+            }
+            else if(e.key.keysym.sym == SDLK_DOWN){
+                is_key_down = false;
+            }
+            else if(e.key.keysym.sym == SDLK_LEFT){
+                is_key_left = false;
+            }
+            else if(e.key.keysym.sym == SDLK_RIGHT){
+                is_key_right = false;
             }
         }
     }
@@ -48,8 +69,16 @@ void Controller::registerRenderer(Renderer * r) {
 }
 
 void Controller::update() {
-    velocity->multiply(0.5); 
+    if(is_key_up)
+        applyAcceleration(Vector2(0, -2));
+    if(is_key_down)
+        applyAcceleration(Vector2(0, 2));
+    if(is_key_left)
+        applyAcceleration(Vector2(-2, 0));
+    if(is_key_right)
+        applyAcceleration(Vector2(2, 0));
     position->add(*velocity);
+    velocity->multiply(0.85); 
     renderer->updatePosition(render_id, position);
 }
 

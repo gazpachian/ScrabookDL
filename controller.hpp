@@ -12,6 +12,7 @@ class Controller {
         shared_ptr<Vector2> velocity;
         Renderer * renderer;
         int render_id;
+        bool is_key_up, is_key_down, is_key_left, is_key_right;
     public:
         Controller();
         Controller(int x, int y);
