@@ -24,10 +24,10 @@ bool Controller::getKeys(SDL_Event e) {
         }
         else if(e.type == SDL_KEYDOWN) {
             if(e.key.keysym.sym == SDLK_UP){
-                applyAcceleration(Vector2(0, -15));
+                applyAcceleration(Vector2(0, -45));
             }
             else if(e.key.keysym.sym == SDLK_DOWN){
-                applyAcceleration(Vector2(0, 15));
+                applyAcceleration(Vector2(0, 45));
             }
         }
     }
@@ -48,7 +48,7 @@ void Controller::registerRenderer(Renderer * r) {
 }
 
 void Controller::update() {
-    velocity->multiply(0.2); 
+    velocity->multiply(0.5); 
     position->add(*velocity);
     renderer->updatePosition(render_id, position);
 }
