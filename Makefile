@@ -1,5 +1,5 @@
-OBJS = SDLTest.cpp vector.cpp playermotion.cpp render.cpp
-HEADERS = vector.hpp playermotion.hpp render.hpp
+OBJS = SDLTest.cpp vector.cpp controller.cpp render.cpp
+HEADERS = vector.hpp controller.hpp render.hpp
 
 OBJ_NAME = SDLTest
 

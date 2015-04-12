@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <tr1/memory>
 #include "vector.hpp"
-#include "playermotion.hpp"
+#include "controller.hpp"
 #include "render.hpp"
 using namespace std::tr1;
 
