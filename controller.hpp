@@ -10,6 +10,7 @@ class Controller {
     private:
         shared_ptr<Vector2> position;
         shared_ptr<Vector2> velocity;
+        static const double motion_drag_coefficient;
         Renderer * renderer;
         int render_id;
         bool is_key_up, is_key_down, is_key_left, is_key_right;

@@ -1,5 +1,6 @@
 #include "controller.hpp"
 using namespace std::tr1;
+const double Controller::motion_drag_coefficient = 0.85;
 
 Controller::Controller() {
     shared_ptr<Vector2> pos (new Vector2(100, 100));
@@ -78,7 +79,7 @@ void Controller::update() {
     if(is_key_right)
         applyAcceleration(Vector2(2, 0));
     position->add(*velocity);
-    velocity->multiply(0.85); 
+    velocity->multiply(motion_drag_coefficient); 
     renderer->updatePosition(render_id, position);
 }
 
