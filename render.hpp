@@ -1,6 +1,7 @@
 #ifndef _RENDER_H
 #define _RENDER_H
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <vector>
 #include <tr1/memory>
 #include "vector.hpp"
@@ -19,9 +20,10 @@ class Renderer {
         ~Renderer();
         /* Renders all sprites in the scene.*/
         void renderAll();
-        /* Reads in a bitmap from the specified file name. Returns the id used
+        /* Reads in an image from the specified file name. Returns the id used
          * for update of the renderable.*/
-        int addBitmap(const char * filename, shared_ptr<Vector2> pos);
+        int addImage(const char * filename, shared_ptr<Vector2> pos);
+        /* Changes the position of the sprite with the given sprite ID.*/
         void updatePosition(int sprite_ID, shared_ptr<Vector2> pos);
 };
 

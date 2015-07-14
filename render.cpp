@@ -19,16 +19,18 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-int Renderer::addBitmap(const char * filename, shared_ptr<Vector2> initialPosition) {
+int Renderer::addImage(const char * filename, shared_ptr<Vector2> initialPosition) {
+    Uint32 colorkey = 0;
     SDL_Surface * win_surface = SDL_GetWindowSurface(window);
-    SDL_Surface * import = SDL_LoadBMP(filename);
+    SDL_Surface * import = IMG_Load(filename);
     SDL_Surface * screen_adapter = NULL;
     if(import == NULL) {
-        fprintf(stderr, "Unable to load image at __LINE__, SDL error: %s\n"
+        fprintf(stderr, "Unable to load image at line %d in %s, SDL error: %s\n", __LINE__, __FILE__
                 , SDL_GetError());
         return -1;
     }
-
+    SDL_GetColorKey(import, &colorkey);
+    SDL_SetColorKey(import, SDL_TRUE, colorkey);
     screen_adapter = SDL_ConvertSurface(import, win_surface->format, 0);
     if(screen_adapter == NULL) {
         fprintf(stderr, "Unable to optimize image at __LINE__, SDL error: %s\n"
